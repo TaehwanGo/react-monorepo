@@ -36,14 +36,14 @@
     "zustand": "^4.0.0-rc.1"
   },
   "scripts": {
-    "start": "craco start",
-    "build": "GENERATE_SOURCEMAP=false craco build",
-    "test": "craco test",
-    "eject": "react-scripts eject",
+    "start": "nx exec -- craco start",
+    "build": "nx exec -- GENERATE_SOURCEMAP=false craco build",
+    "test": "nx exec -- craco test",
+    "eject": "nx exec -- react-scripts eject",
     "prepare": "husky install",
-    "lint": "eslint './src/**/*.{js,ts,jsx,tsx}'",
-    "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "lint": "nx exec -- eslint './src/**/*.{js,ts,jsx,tsx}'",
+    "storybook": "nx exec -- start-storybook -p 6006 -s public",
+    "build-storybook": "nx exec -- build-storybook -s public"
   },
   "eslintConfig": {
     "extends": [
@@ -102,10 +102,26 @@
     "lint-staged": "^12.3.7",
     "prop-types": "^15.8.1",
     "tsconfig-paths-webpack-plugin": "^3.5.2",
-    "webpack": "^5.75.0"
+    "webpack": "^5.75.0",
+    "nx": "15.5.1",
+    "@nrwl/nx-cloud": "latest"
   },
   "lint-staged": {
     "*.{js, ts, jsx, tsx}": "eslint --cache --fix"
   },
-  "proxy": "http://localhost:4000"
+  "proxy": "http://localhost:4000",
+  "nx": {
+    "targets": {
+      "build": {
+        "outputs": [
+          "{projectRoot}/build"
+        ]
+      },
+      "build-storybook": {
+        "outputs": [
+          "{projectRoot}/storybook-static"
+        ]
+      }
+    }
+  }
 }
