@@ -2,27 +2,31 @@
 
 - Nx는 최고 수준의 단일 리포지토리 지원 및 강력한 통합 기능을 갖춘 스마트하고 빠르며 확장 가능한 빌드 시스템입니다.
 
-## Migrating a Create-React-App project into an Nx Workspace
+## package-based repo
 
-- 참고 : https://nx.dev/recipes/adopting-nx/migration-cra
+### build
 
-### Automated migration
-
-```bash
-npx nx init
+```
+npx nx build <project-name>
 ```
 
-- 모노레포로 바꾸는건 아니고 기존 cra 프로젝트를 nx 프로젝트로 바꾸는 것이다
+- project-name: packages 디렉토리에에 존재하는 project 이름
 
-#### Please answer the following questions about the scripts found in your package.json in order to generate task runner configuration
+## 패키지 분리
 
-- Which of the following scripts are cacheable? (Produce the same output given the same input, e.g. build, test and lint usually are, serve and start are not) …
+- packages 디렉토리에 존재하면 npm i 실행 시 node_modules에 설치됨
+- 패키지의 진입점은 package.json의 main 속성에 명시된 파일
 
-  - 전부 다 체크함
+## 이슈
 
-- Does the "start" script create any outputs? If not, leave blank, otherwise provide a path (e.g. dist, lib, build, coverage)
+### husky
 
-  - 빈칸으로 놔두고 엔터
+```
+code 126
+npm ERR! path /Users/gotaehwan/projects/react-monorepo/packages/react-playground
+npm ERR! command failed
+npm ERR! command sh -c -- husky install
+npm ERR! sh: /Users/gotaehwan/projects/react-monorepo/node_modules/.bin/husky: Permission denied
+```
 
-- Does the "build" script create any outputs? If not, leave blank, otherwise provide a path
-  - build
+- package.json에서 prepare 부분 삭제

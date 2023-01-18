@@ -40,7 +40,6 @@
     "build": "GENERATE_SOURCEMAP=false craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
-    "prepare": "husky install",
     "lint": "eslint './src/**/*.{js,ts,jsx,tsx}'",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public"
